@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NEXUS AI Campus — учебная платформа мониторинга инфраструктуры умного кампуса.">
+  <title>NEXUS AI Campus — Smart Campus Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#" aria-label="NEXUS AI Campus home">
+      <span class="brand-mark"><span></span><span></span><span></span><span></span></span>
+      <span class="brand-name">NEXUS<span>AI</span><small>CAMPUS INTELLIGENCE</small></span>
+    </a>
+    <div class="workspace-label">WORKSPACE</div>
+    <nav class="navigation" aria-label="Main navigation">
+      <button class="nav-link active" data-page="overview"><span class="nav-icon">◈</span>Обзор <span class="nav-count">01</span></button>
+      <button class="nav-link" data-page="rooms"><span class="nav-icon">▦</span>Аудитории</button>
+      <button class="nav-link" data-page="devices"><span class="nav-icon">⌁</span>IoT устройства</button>
+      <button class="nav-link" data-page="incidents"><span class="nav-icon">⚑</span>Инциденты <span class="nav-badge" id="incidentBadge">3</span></button>
+      <button class="nav-link" data-page="analytics"><span class="nav-icon">✳</span>AI аналитика</button>
+      <button class="nav-link" data-page="settings"><span class="nav-icon">⚙</span>Настройки</button>
+    </nav>
+    <div class="sidebar-spacer"></div>
+    <div class="campus-status">
+      <div class="status-orb"><span></span></div>
+      <div><strong>Система активна</strong><small>Все службы работают</small></div>
+      <span class="pulse"></span>
+    </div>
+    <div class="profile">
+      <div class="avatar">NC</div><div class="profile-info"><strong>Campus Admin</strong><small>Оператор системы</small></div>
+      <button class="dots" aria-label="Профиль">•••</button>
+    </div>
+    <div class="sidebar-foot">NEXUS PLATFORM <span>v1.0.6</span></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu" aria-label="Открыть меню">☰</button>
+      <div class="breadcrumb"><span>WORKSPACE</span><b>/</b><strong id="pageTitle">Обзор кампуса</strong></div>
+      <div class="topbar-actions">
+        <label class="searchbox"><span>⌕</span><input id="globalSearch" type="search" placeholder="Поиск аудиторий, устройств..." autocomplete="off"><kbd>⌘ K</kbd></label>
+        <button class="round-button" id="themeToggle" aria-label="Сменить тему" title="Сменить тему">☼</button>
+        <button class="notification-button" id="notificationButton" aria-label="Уведомления">♧<i></i></button>
+        <div class="top-avatar">ES</div>
+      </div>
+    </header>
+
+    <div class="content" id="content">
+      <section class="welcome-row">
+        <div><div class="eyebrow"><span class="live-dot"></span> LIVE CAMPUS OVERVIEW</div><h1>Добро пожаловать,<br><span>оператор.</span></h1><p class="intro">Вот что происходит в кампусе прямо сейчас.</p></div>
+        <div class="date-card"><span class="date-icon">◷</span><div><small>СЕГОДНЯ</small><strong id="todayDate">22 октября 2026</strong><span id="clock">19:00:00 · GMT+6</span></div></div>
+      </section>
+
+      <section class="hero-banner">
+        <div class="hero-copy"><div class="hero-pill"><span></span> CAMPUS INTELLIGENCE</div><h2>Умный кампус.<br><em>Умные решения.</em></h2><p>Единый центр управления инфраструктурой, IoT-датчиками и событиями кампуса.</p><button class="button button-light" data-go="analytics">Открыть AI аналитику <span>↗</span></button></div>
+        <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="core"><div class="core-inner">N<span>✳</span></div></div><div class="orbit-node node-a">⌁</div><div class="orbit-node node-b">◈</div><div class="orbit-node node-c">↗</div><div class="orbit-node node-d">▦</div><div class="art-caption">CONNECTED CAMPUS <span>● ONLINE</span></div></div>
+      </section>
+
+      <section class="section-heading"><div><span class="eyebrow">CAMPUS PULSE</span><h2>Ключевые показатели</h2></div><button class="text-button" data-go="analytics">Подробная аналитика <span>→</span></button></section>
+      <section class="metric-grid" id="metrics"></section>
+
+      <section class="dashboard-grid">
+        <article class="panel chart-panel"><div class="panel-head"><div><span class="eyebrow">ENERGY MONITORING</span><h3>Энергопотребление</h3></div><select id="energyPeriod" aria-label="Период графика"><option value="day">Сегодня</option><option value="week">7 дней</option></select></div><div class="chart-legend"><span><i class="legend-blue"></i>Корпус A</span><span><i class="legend-teal"></i>Корпус B</span><strong id="energyTotal">412 <small>kWh</small></strong></div><div class="chart-wrap"><canvas id="energyChart" aria-label="График энергопотребления"></canvas></div></article>
+        <article class="panel health-panel"><div class="panel-head"><div><span class="eyebrow">INFRASTRUCTURE</span><h3>Состояние системы</h3></div><button class="more-button" data-go="devices">•••</button></div><div class="health-score"><div class="score-ring"><div><strong id="healthScore">94</strong><small>из 100</small></div></div><div><strong>Отличное состояние</strong><p>Большинство систем работает штатно.</p></div></div><div class="health-row"><span><i class="dot dot-teal"></i>Онлайн устройства</span><strong id="onlineCount">22 <small>/ 24</small></strong></div><div class="health-row"><span><i class="dot dot-amber"></i>Предупреждения</span><strong id="warningCount">03</strong></div><div class="health-row"><span><i class="dot dot-red"></i>Критические события</span><strong id="criticalCount">01</strong></div><button class="button button-outline full-width" data-go="devices">Мониторинг устройств <span>→</span></button></article>
+      </section>
+
+      <section class="dashboard-grid lower-grid">
+        <article class="panel rooms-panel"><div class="panel-head"><div><span class="eyebrow">ROOM MONITORING</span><h3>Аудитории кампуса</h3></div><button class="text-button" data-go="rooms">Все аудитории →</button></div><div id="roomPreview"></div></article>
+        <article class="panel alerts-panel"><div class="panel-head"><div><span class="eyebrow">AI OBSERVABILITY</span><h3>События и сигналы</h3></div><span class="live-label"><i></i> LIVE</span></div><div id="alertPreview" class="alert-list"></div><button class="button button-outline full-width" data-go="analytics">Открыть центр аналитики <span>→</span></button></article>
+      </section>
+      <footer class="page-footer"><span>© 2026 NEXUS AI CAMPUS</span><span><i class="live-dot"></i> Все данные демонстрационные · Учебный прототип</span><span>BUILT FOR A SMARTER FUTURE ↗</span></footer>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>
